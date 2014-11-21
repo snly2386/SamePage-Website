@@ -19,10 +19,37 @@ class Samepage.Landing extends Backbone.View
 		@waypoints_section_5()
 		@waypoints_section_6()
 		@move_envelope()
+		@menu = false
 
 	events: 
-		'click .down-arrow' : 'scroll_down'
+		'click .down-arrow' 		: 'scroll_down'
+		'click .bar'				: 'toggle_menu'
+		'click .home, .drop-home'	: 'go_home'
+		'click .services'			: 'go_services'
+		'click .contact'    		: 'go_contact'
 
+	go_home: ->
+		home = $('.icon-slider').offset().top
+		console.log home
+		$('body').animate({scrollTop: home}, 1000)
+
+	go_services: ->
+		services = $('.section-6').offset().top
+		console.log services
+		$("body").animate({scrollTop: services}, 1000)
+
+	go_contact: ->
+		contact = $('.section-8').offset().top
+		console.log contact
+		$('body').animate({scrollTop: contact}, 1000)
+
+	toggle_menu: ->
+		if @menu is false
+			@$('.dropdown').show 'slide', {direction: 'up'}, 1000
+			@menu = true
+		else
+			@$('.dropdown').hide 'slide', {direction: 'up'}, 1000
+			@menu = false
 
 	scroll_down: ->
 		scrollElement =  $('.title').offset().top
@@ -33,6 +60,7 @@ class Samepage.Landing extends Backbone.View
 		 if direction is "down"
 				$('.title h1').show().addClass('animated fadeInRight')
 				$('.image').addClass('roll-in')
+				$('.navbar').show 'slide', {direction: 'up'}, 1000
 				window.setTimeout (->
 				  $('.title p').show().addClass('animated fadeInRight')
 				  # return
@@ -41,6 +69,9 @@ class Samepage.Landing extends Backbone.View
 		    $('.title h1').removeClass('fadeInRight').hide()
 		    $('.image').removeClass('roll-in')
 		    $('.title p').removeClass('fadeInRight').hide()
+		    $('.navbar').hide 'slide', {direction: 'up'}, 'fast'
+		    $('.dropdown').hide()
+		    @menu = false
 		    )
 
 	waypoints_section_3: ->
@@ -104,6 +135,10 @@ class Samepage.Landing extends Backbone.View
 				window.setTimeout (->
 					$('.four').show().addClass('animated fadeInUp')
 					), 1100
+				$('.drop-item').removeClass('selected')
+				$('menu-item').removeClass('selected')
+				$('.drop-services').addClass('selected')
+				# $('.services').addClass('selected')
 			else
 			  $('.section-6-content h1').removeClass('fadeInUp').hide()
 			  $('.section-6-content p').removeClass('fadeInUp').hide()
