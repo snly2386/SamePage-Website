@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .landing{
 	.background{
-		background-image: url('vibrant.jpg');
+		background-image: asset-url('vibrant.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
 		width: 100%;
