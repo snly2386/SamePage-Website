@@ -10,6 +10,7 @@ class Samepage.Landing extends Backbone.View
 		@render()
 		@position()
 		@set_background()
+		@adjust_height()
 		@text_slider()
 		@icon_slider()
 		@wow_js()
@@ -199,6 +200,12 @@ class Samepage.Landing extends Backbone.View
 
 	wow_js: ->
 		new WOW().init()
+
+	adjust_height: ->
+		$(window).resize( ->
+			height = $(window).height()
+			$('.background').css('height', height)
+			)
 
 	set_background: ->
 		height = $(window).height()
